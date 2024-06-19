@@ -49,3 +49,17 @@ EPGPARAMETERS={
     'RefocAnfleStart':90,
     'RefocAnfleEnd':180
 }
+
+# Training process configuration
+
+#The number of ecpochs to train the model
+EPOCHS=100
+# The number of layers of the model
+LAYERS=6
+#The number of hidden units of the model
+HIDDEN=256
+#verbose
+VERBOSE=1
+#batch size
+BATCHSIZE=2000
+
