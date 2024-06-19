@@ -63,3 +63,10 @@ VERBOSE=1
 #batch size
 BATCHSIZE=2000
 
+# Testing process configuration
+
+RANGES={"MY": [10, 25],
+        "IE": [26, 120], 
+        "PTH": [120.1, 500], 
+        "CSF": [500, 1000]}
+
