@@ -20,6 +20,20 @@ def main(signals_file:str,distributions_file:str,angles_file:str):
     if not os.path.exists('models'):
         os.mkdir('models')
     model.save('models/model.keras')
+    # create a custom model for the flip angle
+    model=create_custom_model(indim=EPGPARAMETERS['Echos'],
+                              outdim=1,
+                              use_softmax=False,
+                              hidden_layers=LAYERS,
+                              hidden_units=HIDDEN)
+    model.compile(optimizer=tf.keras.optimizers.Adam(learning_rate=0.0001),loss='mse',metrics=['mse'])
+    start=time.time()
+    model.fit(signals,angles,epochs=EPOCHS,verbose=VERBOSE,validation_split=0.1,batch_size=BATCHSIZE)
+    end=time.time()
+    print('TRAINING TIME: {} seconds'.format(end-start))
+    if not os.path.exists('models'):
+        os.mkdir('models')
+    model.save('models/angle_model.keras')
 
 if __name__=='__main__':
     main('data/signals.npy','data/distributions.npy','data/angles.npy')
