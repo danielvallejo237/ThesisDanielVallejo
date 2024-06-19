@@ -1,4 +1,4 @@
 This is the pipeline for the generation of the different stages of the supervised learning approach. The supervised learning stages are divided into three main differet branches.
-* The first branch corresponds to the synthetic data generation where the number of signals is given as well as the different constraints for the signal generation
+* The first branch corresponds to the synthetic data generation where the number of signals is given as well as the different constraints for the signal generation. Run ''' python data_generation.py ''' to replicate the data used to generate the results from the thesis.
 * The second stage is referring to training the model of the supervised learning approach, this training is done using tensorflow, therefore, this library as well as some others are needed to train the model.
 * The last stage is testing the model with real data or synthetic data and obtain the $MWF$ and $T_{2}$ maps as well as the flip angle for a certian volume. This replicates the parts mentioned in chaper 3 and 4 of the thesis work.
