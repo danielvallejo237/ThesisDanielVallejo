@@ -29,10 +29,7 @@ config=Config(
 tconfig=TrainingConfig(epochs=EPOCHS,
                        lr=LR)
 
-# Inicializamos la semilla para que los experimentos sean reproducibles
-torch.manual_seed(0)
-
-# Inicializamos el modelo
+# Model initialization
 model=JointNetworkV2(config)
 
 
@@ -66,3 +63,25 @@ if __name__=='__main__':
     dloader=create_dloader(signals)
     model.eval()
     train_JointNetworkV2(model,tconfig,dloader)
+    predicted_signals,predicted_t2s,predicted_weights=predict(model,tconfig,dloader)
+    # Create a square volume of the predicted signals
+    predicted_signals=predicted_signals.reshape(-1,N_ECHOS)
+    predicted_signals=predicted_signals.reshape(NUM_SIGNALS,NUM_SIGNALS,N_ECHOS)
+    # Create a square volume of the predicted t2s
+    predicted_t2s=predicted_t2s.reshape(-1,NUM_PARMETERS)
+    predicted_t2s=predicted_t2s.reshape(NUM_SIGNALS,NUM_SIGNALS,NUM_PARMETERS)
+    # Create a square volume of the predicted weights
+    predicted_weights=predicted_weights.reshape(-1,NUM_PARMETERS)
+    predicted_weights=predicted_weights.reshape(NUM_SIGNALS,NUM_SIGNALS,NUM_PARMETERS)
+    # Save the predicted signals
+    predicted_signals_name=os.path.join(args.inpath,args.inpath+"_predicted_signals.nii")
+    predicted_signals_nifti=nib.Nifti1Image(predicted_signals,np.eye(4))
+    nib.save(predicted_signals_nifti,predicted_signals_name)
+    # Save the predicted t2s
+    predicted_t2s_name=os.path.join(args.inpath,args.inpath+"_predicted_t2s.nii")
+    predicted_t2s_nifti=nib.Nifti1Image(predicted_t2s,np.eye(4))
+    nib.save(predicted_t2s_nifti,predicted_t2s_name)
+    # Save the predicted weights
+    predicted_weights_name=os.path.join(args.inpath,args.inpath+"_predicted_weights.nii")
+    predicted_weights_nifti=nib.Nifti1Image(predicted_weights,np.eye(4))
+    nib.save(predicted_weights_nifti,predicted_weights_name)
