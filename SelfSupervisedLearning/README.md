@@ -2,4 +2,4 @@ This is the self-supervised approach described in the thesis; in this stage, we 
 
 This module consists of two main parts.
 * The first corresponds to data generation with the two or three exponential models. Run ``` python data_generation.py ``` to generate a synthetic phantom. Feel free to change the path and the number of parameters of the compartments according to the needs. 
-* The second part corresponds to training the model with the synthetically generated data. 
+* The second part corresponds to training the model with the synthetically generated data. Run ``` python train.py --path (path) ``` to train and make an inference of a created volume from the synthetic data generation. 
