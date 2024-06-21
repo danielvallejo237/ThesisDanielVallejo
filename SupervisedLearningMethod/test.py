@@ -51,8 +51,20 @@ def main(input_volume:str,mask:Optional[str]=None):
     signals=vol.get_fdata()
     shape=signals.shape
     signals=signals.reshape(-1,signals.shape[-1])
+    number_of_voxels=signals.shape[0]
+    nozero=np.nonzero(signals[:,0])
+    signals=signals[nozero]
+    signals=signals/signals[:,0].reshape(-1,1) #Divide by the first element to avoid numerical instability and to normalize the signal, the alforithm requires proper normalization
     distributions=model.predict(signals)
     angles=angle_model.predict(signals)
+    #Retirn to the original shape
+    distribuciones=np.zeros((number_of_voxels,distributions.shape[-1]))
+    distribuciones[nozero]=distributions
+    distributions=distribuciones
+    angles_new=np.zeros((number_of_voxels,angles.shape[-1]))
+    angles_new[nozero]=angles
+    angles=angles_new
+    #Returning everything to the original shape to avoid computation of unnecesary voxels
     sequence=return_sequence()
     indices=find_indices(sequence)
     volume_fractions=compute_volume_fraction(distributions,indices)
