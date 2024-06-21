@@ -1,8 +1,7 @@
 This is the repository that replicates results obtained in the Master thesis entitled "Automatic Learning For Estimating the $T_{2}$ Spectrum and Myelin Water Fraction Mapping from MR Data" presented by Daniel Vallejo Aldana - Research Center in Mathematics (CIMAT) Guanajuato Mexico.
 
-*
- * @author Daniel Vallejo Aldana
- * @contact daniel.vallejo@cimat.mx
+- @author Daniel Vallejo Aldana
+- @contact daniel.vallejo@cimat.mx
 
 * To run all codes from this repository install the required packages described in the requirements file.
 
